@@ -13,6 +13,24 @@ int counter(const binary_tree_t *tree)
 		return (1 + counter(tree->left) + counter(tree->right));
 }
 /**
+ * _pow - calculate the power of a number
+ * @base: the base number
+ * @power: the power to raise the number to
+ * Return: the resulting number
+ */
+int _pow(int base, int power)
+{
+	int temp;
+
+	if (power == 0)
+		return (1);
+	temp = _pow(base, power / 2);
+	if ((power % 2) == 0)
+		return (temp * temp);
+	else
+		return (base * temp * temp);
+}
+/**
  * binary_tree_is_perfect - checks if a binary tree is perfect
  * @tree: pointer to the root of the tree
  * Return: 1 or 0
@@ -25,7 +43,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 		return (0);
 	h = (int)binary_tree_height(tree);
 	nodes = counter(tree);
-	if (nodes == (pow(2, h + 1)) - 1)
+	if (nodes == (_pow(2, h + 1)) - 1)
 		return (1);
 	else
 		return (0);
